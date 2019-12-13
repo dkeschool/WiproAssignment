@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WiproAssignment</string>
+    <string name="unable_to_check_net">Unable to check Internet availability</string>
 </resources>
