@@ -1,9 +1,11 @@
-package com.example.wiproassignment;
+package com.example.wiproassignment.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.wiproassignment.R;
+
+public class AboutCanadaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

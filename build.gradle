@@ -22,6 +22,13 @@ allprojects {
     }
 }
 
+ext {
+    retrofit_version = '2.5.0'
+    okhttp_lib_version = '3.12.1'
+    rx_version = '2.1.1'
+    retrofit_rx_adapter = '1.0.0'
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
