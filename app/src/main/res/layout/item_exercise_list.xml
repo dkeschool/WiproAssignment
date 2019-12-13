@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="listitem"
+            type="com.example.wiproassignment.models.CanadaListItemModel" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text='@{exercise.title  ??  @string/not_available }'
+            android:textColor="@color/colorMediumPurple"
+            android:textSize="@dimen/_15sdp"
+            tools:text="Murdochs need counselling after hacking scandal, says magzine"
+            tools:ignore="MissingConstraints" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imageViewHref"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:source="@{exercise.imageHref}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{exercise.description ?? @string/not_available}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintEnd_toStartOf="@id/imageViewHref"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+            tools:text="NEW YORK: The british phone The british phone-hacking scandal brought simmering tensions." />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
