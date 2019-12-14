@@ -20,7 +20,7 @@ public class MyApplication extends Application {
     }
 
     /*
-    * static method to get instance of Application class
+    * static method to get the instance of Application class
     * */
     public static MyApplication getApplicationInstance() {
         if (mMyAppInstance == null) {

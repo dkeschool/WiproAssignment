@@ -2,16 +2,14 @@ package com.example.wiproassignment.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.view.View;
 
 import com.example.wiproassignment.R;
 import com.example.wiproassignment.application.MyApplication;
+import com.example.wiproassignment.base.BaseActivity;
 import com.example.wiproassignment.databinding.ActivityAboutCanadaBinding;
 import com.example.wiproassignment.network.ApiInterface;
 import com.example.wiproassignment.utils.NetworkUtil;
@@ -19,7 +17,7 @@ import com.example.wiproassignment.utils.SchedulerProvider.BaseSchedulerProvider
 import com.example.wiproassignment.utils.SchedulerProvider.SchedulerProvider;
 import com.example.wiproassignment.utils.ViewModelFactory;
 
-public class AboutCanadaActivity extends AppCompatActivity {
+public class AboutCanadaActivity extends BaseActivity {
 
     private ActivityAboutCanadaBinding mActivityAboutCanadaBinding;
     private AboutCanadaListAdapter mAboutCanadaListAdapter;
@@ -41,7 +39,7 @@ public class AboutCanadaActivity extends AppCompatActivity {
         mBaseSchedulerProvider = new SchedulerProvider();
 
         // setting toolbar
-        toolbarSetup();
+        toolbarSetup(mActivityAboutCanadaBinding.toolbar.toolbarCommon);
 
         // setting recycler view and attaching adapter to it
         recyclerViewSetup();
@@ -57,9 +55,13 @@ public class AboutCanadaActivity extends AppCompatActivity {
         // setting pull to refresh for updated data
         pullToRefreshSetup();
 
-
         // hitting About Canda Api
         mAboutCanadaViewModel.hitAboutCanadaApi();
+    }
+
+    @Override
+    protected int getResourceId() {
+        return 0;
     }
 
     /*
@@ -97,8 +99,8 @@ public class AboutCanadaActivity extends AppCompatActivity {
             if (mActivityAboutCanadaBinding.swipeRefreshLayout.isRefreshing())
                 mActivityAboutCanadaBinding.swipeRefreshLayout.setRefreshing(false);
 
-            if(msg!=null)
-                Snackbar.make(mActivityAboutCanadaBinding.rootLayout, msg, 3000).show();
+            if (msg != null)
+                AboutCanadaActivity.this.showSnackBar(mActivityAboutCanadaBinding.rootLayout, msg);
         });
 
     }
@@ -113,13 +115,6 @@ public class AboutCanadaActivity extends AppCompatActivity {
 
         mAboutCanadaListAdapter = new AboutCanadaListAdapter(this);
         mActivityAboutCanadaBinding.recyclerViewExercise.setAdapter(mAboutCanadaListAdapter);
-    }
-
-    /*
-    * Method to setup toolbar
-    * */
-    private void toolbarSetup() {
-        setSupportActionBar(mActivityAboutCanadaBinding.toolbar.toolbarCommon);
     }
 
 }
