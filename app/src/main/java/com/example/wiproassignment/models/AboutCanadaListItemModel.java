@@ -1,26 +1,28 @@
 package com.example.wiproassignment.models;
 
+import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatImageView;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.wiproassignment.R;
-import com.squareup.picasso.Picasso;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class AboutCanadaListItemModel {
 
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("description")
+    @Expose
     private String description;
+    @SerializedName("imageHref")
+    @Expose
     private String imageHref;
-
-    @BindingAdapter({"android:source"})
-    public static void loadImage(ImageView view, String url) {
-        if (url == null || url.isEmpty()) {
-            view.setImageResource(R.drawable.placeholder_iamge);
-        } else {
-            Picasso.get().load(url).placeholder(R.drawable.placeholder_iamge).into(view);
-        }
-    }
 
     @Override
     public boolean equals(@Nullable Object obj) {

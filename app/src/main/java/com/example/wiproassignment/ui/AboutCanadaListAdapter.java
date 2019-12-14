@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.wiproassignment.R;
 import com.example.wiproassignment.databinding.ItemExerciseListBinding;
 import com.example.wiproassignment.models.AboutCanadaListItemModel;
@@ -58,19 +60,29 @@ public class AboutCanadaListAdapter extends ListAdapter<AboutCanadaListItemModel
     * */
     public class AboutCanadaViewHolder extends RecyclerView.ViewHolder {
 
-        private ItemExerciseListBinding itemExerciseListBinding;
+        private ItemExerciseListBinding mItemExerciseListBinding;
 
         AboutCanadaViewHolder(ItemExerciseListBinding itemExerciseListBinding) {
             super(itemExerciseListBinding.getRoot());
-            this.itemExerciseListBinding = itemExerciseListBinding;
+            this.mItemExerciseListBinding = itemExerciseListBinding;
         }
 
         /*
         * Method to bind list item data into view
         * */
         private void bindDataWithView(int position) {
-            AboutCanadaListItemModel exercise = getItem(position);
-            itemExerciseListBinding.setListitem(exercise);
+            AboutCanadaListItemModel item = getItem(position);
+            mItemExerciseListBinding.setListitem(item);
+
+            if (item.getImageHref() == null || item.getImageHref().trim().isEmpty()) {
+                mItemExerciseListBinding.ivHref.setImageResource(R.drawable.placeholder_iamge);
+            } else {
+
+                Glide.with(mContext).load(item.getImageHref().replace("http","https"))
+                   .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                   .placeholder(R.drawable.placeholder_iamge)
+                   .into(mItemExerciseListBinding.ivHref);
+            }
         }
     }
 

@@ -101,6 +101,7 @@ public class AboutCanadaActivity extends BaseActivity {
         mAboutCanadaViewModel.getAboutCanadaResponseLiveData().observe(this, aboutCanadaModel -> {
             if (aboutCanadaModel != null && aboutCanadaModel.getRows()!=null) {
                 mAboutCanadaListAdapter.submitList(aboutCanadaModel.getRows());
+                mAboutCanadaListAdapter.notifyDataSetChanged();
                 if(getSupportActionBar()!=null)
                     getSupportActionBar().setTitle(!TextUtils.isEmpty(aboutCanadaModel.getTitle())?aboutCanadaModel.getTitle():getString(R.string.app_name));
             } else

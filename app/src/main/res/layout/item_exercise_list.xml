@@ -17,7 +17,7 @@
         android:padding="@dimen/_10sdp">
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/textViewTitle"
+            android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/_10sdp"
@@ -28,23 +28,22 @@
             tools:ignore="MissingConstraints" />
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/imageViewHref"
+            android:id="@+id/ivHref"
             android:layout_width="@dimen/_90sdp"
             android:layout_height="@dimen/_60sdp"
-            android:source="@{listitem.imageHref}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/textViewDescription"
+            android:id="@+id/tvDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{listitem.description ?? @string/not_available}"
             android:textColor="@android:color/black"
             android:textSize="@dimen/_10sdp"
-            app:layout_constraintEnd_toStartOf="@id/imageViewHref"
+            app:layout_constraintEnd_toStartOf="@id/ivHref"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
             tools:text="NEW YORK: The british phone The british phone-hacking scandal brought simmering tensions." />
 
     </android.support.constraint.ConstraintLayout>

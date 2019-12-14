@@ -62,6 +62,6 @@ dependencies {
     implementation "com.intuit.sdp:sdp-android:$sdp_lib_version"
 
     // image display and cache
-    implementation "com.squareup.picasso:picasso:$picasso_lib_version"
+    implementation "com.github.bumptech.glide:glide:$glide_lib_version"
 
 }
