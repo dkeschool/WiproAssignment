@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.example.wiproassignment.R;
 import com.example.wiproassignment.application.MyApplication;
+import com.example.wiproassignment.base.RichMediatorLiveData;
 import com.example.wiproassignment.models.AboutCanadaResponseModel;
 import com.example.wiproassignment.network.ApiInterface;
 import com.example.wiproassignment.utils.NetworkUtil;
@@ -39,23 +40,21 @@ public class AboutCanadaRepo {
      * Method to call About Canada API and get List Items
      *
      * @param aboutCanadaRespModelLiveData  AboutCanadaResponseModelLiveData to notify the observers when APi hits successfully, with
-*                                      proper parsed response
+*                                      proper parsed response and notify with proper msg with gets any error
      *
      * @param mutableIsLoadingStateLiveData  mutableIsLoadingStateLiveData to notify the observers when we APi hitting starts
  *                                     and when it ends.
      *
-     *  @param mutableErrorMessageLiveData   mutableErrorMessageLiveData to notify the observers when we get any error while
-     *                                 hitting the API
      * */
     @SuppressLint("CheckResult")
-    public void hitAboutCanadaApi(MutableLiveData<AboutCanadaResponseModel> aboutCanadaRespModelLiveData,
-          MutableLiveData<Boolean> mutableIsLoadingStateLiveData, MutableLiveData<String> mutableErrorMessageLiveData) {
+    public void hitAboutCanadaApi(RichMediatorLiveData<AboutCanadaResponseModel> aboutCanadaRespModelLiveData,
+                          MutableLiveData<Boolean> mutableIsLoadingStateLiveData) {
 
         mutableIsLoadingStateLiveData.setValue(true);
 
         if (!mNetworkUtil.isNetworkAvailable()) {
             mutableIsLoadingStateLiveData.setValue(false);
-            mutableErrorMessageLiveData.setValue(mMyApplication.getResources().getString(R.string.no_internet));
+            aboutCanadaRespModelLiveData.setError(mMyApplication.getResources().getString(R.string.no_internet));
         } else {
 
             mApiInterface.getAboutCanadaList().subscribeOn(mSchedulerProvider.ioWorker())
@@ -73,7 +72,7 @@ public class AboutCanadaRepo {
                             /*
                             * Setting Error state if response model is null
                             * */
-                            mutableErrorMessageLiveData.setValue(mMyApplication.getResources().getString(R.string.error_try_again_later));
+                            aboutCanadaRespModelLiveData.setError(mMyApplication.getResources().getString(R.string.error_try_again_later));
                         }
                     }
                     @Override
@@ -82,7 +81,7 @@ public class AboutCanadaRepo {
                          * Setting Error if request failed
                          * */
                         mutableIsLoadingStateLiveData.setValue(false);
-                        mutableErrorMessageLiveData.setValue(e.getMessage());
+                        aboutCanadaRespModelLiveData.setError(e.getMessage());
                     }
                     @Override
                     public void onComplete() {}

@@ -2,26 +2,37 @@ package com.example.wiproassignment.ui;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.util.Patterns;
 
 import com.example.wiproassignment.R;
+import com.example.wiproassignment.base.RichMediatorLiveData;
 import com.example.wiproassignment.models.AboutCanadaResponseModel;;
 
 public class AboutCanadaViewModel extends ViewModel {
 
     private AboutCanadaRepo mAboutCanadaRepo;
-    private MutableLiveData<Boolean> mMutableIsLoading;
-    private MutableLiveData<String> mMutableErrorMessage;
-    private MutableLiveData<AboutCanadaResponseModel> mAboutCanadaResponseModel;
+    private MutableLiveData<Boolean> mIsLoadingLiveData;
+
+    private Observer<String> mErrorObserver;
+    private RichMediatorLiveData<AboutCanadaResponseModel> mAboutCanadaResponseLiveData;
+
 
     /**
      * Parameterised constructor
      *
-     * @param aboutCanadaRepo  AboutCanadaRespository object
+     * @param aboutCanadaRepo  AboutCanadaRespository instance
      * */
     public AboutCanadaViewModel(AboutCanadaRepo aboutCanadaRepo) {
         this.mAboutCanadaRepo = aboutCanadaRepo;
+    }
+
+    /*
+    * Method to initialise and set observers
+    * */
+    public void setGenericListeners(Observer<String> errorObserver) {
+        this.mErrorObserver = errorObserver;
         initLiveData();
     }
 
@@ -29,37 +40,37 @@ public class AboutCanadaViewModel extends ViewModel {
      * Method to initLiveData's
      * */
     public void initLiveData() {
-        mMutableErrorMessage = new MutableLiveData<>();
-        mMutableIsLoading = new MutableLiveData<>();
-        mAboutCanadaResponseModel = new MutableLiveData<>();
+        if (mAboutCanadaResponseLiveData == null) {
+            mAboutCanadaResponseLiveData = new RichMediatorLiveData<AboutCanadaResponseModel>() {
+                @Override
+                protected Observer<String> getErrorObserver() {
+                    return mErrorObserver;
+                }
+            };
+        }
+        mIsLoadingLiveData = new MutableLiveData<>();
     }
 
     /**
      * Method used to hit About Canada api after checking validations
      **/
     public void hitAboutCanadaApi() {
-        mAboutCanadaRepo.hitAboutCanadaApi(mAboutCanadaResponseModel, mMutableIsLoading, mMutableErrorMessage);
+        mAboutCanadaRepo.hitAboutCanadaApi(mAboutCanadaResponseLiveData, mIsLoadingLiveData);
     }
 
     /**
     * Method to call About Canada API and get List Items
     * */
     public MutableLiveData<AboutCanadaResponseModel> getAboutCanadaResponseLiveData() {
-        return mAboutCanadaResponseModel;
+        return mAboutCanadaResponseLiveData;
     }
 
     /*
     * Method to get Loading state to know whether API is hitting or not
     * */
     public MutableLiveData<Boolean> getLoadingStateLiveData() {
-        return  mMutableIsLoading;
+        return  mIsLoadingLiveData;
     }
 
-    /*
-     * Method to get Error state
-     * */
-    public MutableLiveData<String> getErrorMessageLiveData() {
-        return mMutableErrorMessage;
-    }
 
 }

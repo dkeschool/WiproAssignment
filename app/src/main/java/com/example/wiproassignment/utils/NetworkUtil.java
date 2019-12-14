@@ -15,7 +15,7 @@ public class NetworkUtil {
     /**
      * Parameterised constructor
      *
-     * @param context
+     * @param context Context of the Activity or Fragment which is creating its instance
      * */
     public NetworkUtil(Context context) {
         this._mContext = context;

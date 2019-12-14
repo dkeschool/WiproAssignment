@@ -21,20 +21,16 @@ import com.example.wiproassignment.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private RelativeLayout baseContainer;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
-        baseContainer = findViewById(R.id.rl_base_container);
-        setLayout();
+        //setLayout();
     }
 
-    /**
+/*    *//**
      * Method is used to set the layout in the Base Activity.
      * Layout params of the inserted child is match parent
-     */
+     *//*
     private void setLayout() {
         if (getResourceId() != -1) {
             removeLayout();
@@ -48,13 +44,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    /**
+    *//**
      * This method is used to remove the view already present as a child in relative layout.
-     */
+     *//*
     private void removeLayout() {
         if (baseContainer.getChildCount() >= 1)
             baseContainer.removeAllViews();
-    }
+    }*/
 
     /**
      * hides keyboard onClick anywhere besides edit text

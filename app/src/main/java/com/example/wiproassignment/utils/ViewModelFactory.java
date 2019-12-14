@@ -14,7 +14,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     /**
     * Parameterised constructor
     *
-    * @param aboutCanadaRepo  AboutCanadaRespository object
+    * @param aboutCanadaRepo  AboutCanadaRespository instance
     * */
     public ViewModelFactory(AboutCanadaRepo aboutCanadaRepo) {
         this.mAboutCanadaRepo = aboutCanadaRepo;

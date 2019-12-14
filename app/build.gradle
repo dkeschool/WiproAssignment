@@ -61,4 +61,7 @@ dependencies {
     // Library to manage UI for different screen sizes phones
     implementation "com.intuit.sdp:sdp-android:$sdp_lib_version"
 
+    // image display and cache
+    implementation "com.squareup.picasso:picasso:$picasso_lib_version"
+
 }

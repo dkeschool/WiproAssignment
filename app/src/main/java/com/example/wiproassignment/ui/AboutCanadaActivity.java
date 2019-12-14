@@ -1,10 +1,14 @@
 package com.example.wiproassignment.ui;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.example.wiproassignment.R;
@@ -24,6 +28,7 @@ public class AboutCanadaActivity extends BaseActivity {
     private AboutCanadaViewModel mAboutCanadaViewModel;
     private NetworkUtil mNetworkUtil;
     private ApiInterface mApiInterface;
+    private Observer<String> mErrorObserver;
 
     private BaseSchedulerProvider mBaseSchedulerProvider;
 
@@ -34,9 +39,13 @@ public class AboutCanadaActivity extends BaseActivity {
 
         mActivityAboutCanadaBinding = DataBindingUtil.setContentView(this, R.layout.activity_about_canada);
 
-        mNetworkUtil = new NetworkUtil(this);
-        mApiInterface = MyApplication.getApplicationInstance().getApiInterface();
-        mBaseSchedulerProvider = new SchedulerProvider();
+        init();
+
+        // initialize view model using view model factory
+        mAboutCanadaViewModel = ViewModelProviders.of(this,
+                new ViewModelFactory(new AboutCanadaRepo(MyApplication.getApplicationInstance(), mNetworkUtil,
+                mApiInterface, mBaseSchedulerProvider))).get(AboutCanadaViewModel.class);
+        mAboutCanadaViewModel.setGenericListeners(getmErrorObserver());
 
         // setting toolbar
         toolbarSetup(mActivityAboutCanadaBinding.toolbar.toolbarCommon);
@@ -44,12 +53,7 @@ public class AboutCanadaActivity extends BaseActivity {
         // setting recycler view and attaching adapter to it
         recyclerViewSetup();
 
-        // initialize view model using view model factory
-        mAboutCanadaViewModel = ViewModelProviders.of(this,
-            new ViewModelFactory(new AboutCanadaRepo(MyApplication.getApplicationInstance(), mNetworkUtil,
-                mApiInterface, mBaseSchedulerProvider))).get(AboutCanadaViewModel.class);
-
-        // observe data and set it into recycler view
+        // observing data and set it into recycler view
         observeViewModelData();
 
         // setting pull to refresh for updated data
@@ -57,6 +61,23 @@ public class AboutCanadaActivity extends BaseActivity {
 
         // hitting About Canda Api
         mAboutCanadaViewModel.hitAboutCanadaApi();
+    }
+
+
+    /*
+    * Method to initialise
+    * */
+    private void init() {
+        mNetworkUtil = new NetworkUtil(this);
+        mApiInterface = MyApplication.getApplicationInstance().getApiInterface();
+        mBaseSchedulerProvider = new SchedulerProvider();
+    }
+
+    /*
+    * Getter method of error observer
+    * */
+    public Observer<String> getmErrorObserver() {
+        return mErrorObserver;
     }
 
     @Override
@@ -68,7 +89,7 @@ public class AboutCanadaActivity extends BaseActivity {
     * Method to initialise pull to refresh listener
     * */
     private void pullToRefreshSetup() {
-        mActivityAboutCanadaBinding.swipeRefreshLayout.setOnRefreshListener(() -> observeViewModelData());
+        mActivityAboutCanadaBinding.swipeRefreshLayout.setOnRefreshListener(() -> mAboutCanadaViewModel.hitAboutCanadaApi());
     }
 
     /*
@@ -78,10 +99,13 @@ public class AboutCanadaActivity extends BaseActivity {
 
         // observing data from api call
         mAboutCanadaViewModel.getAboutCanadaResponseLiveData().observe(this, aboutCanadaModel -> {
-            if (aboutCanadaModel != null) {
+            if (aboutCanadaModel != null && aboutCanadaModel.getRows()!=null) {
                 mAboutCanadaListAdapter.submitList(aboutCanadaModel.getRows());
-                getSupportActionBar().setTitle(aboutCanadaModel.getTitle());
-            }
+                if(getSupportActionBar()!=null)
+                    getSupportActionBar().setTitle(!TextUtils.isEmpty(aboutCanadaModel.getTitle())?aboutCanadaModel.getTitle():getString(R.string.app_name));
+            } else
+                AboutCanadaActivity.this.showSnackBar(mActivityAboutCanadaBinding.rootLayout, getString(R.string.error_try_again_later));
+
             if (mActivityAboutCanadaBinding.swipeRefreshLayout.isRefreshing())
                 mActivityAboutCanadaBinding.swipeRefreshLayout.setRefreshing(false);
         });
@@ -94,15 +118,14 @@ public class AboutCanadaActivity extends BaseActivity {
                 mActivityAboutCanadaBinding.textViewLoading.setVisibility(View.GONE);
         });
 
-        // observing error message here
-        mAboutCanadaViewModel.getErrorMessageLiveData().observe(this, msg -> {
+        // Creating Observer of Error
+        mErrorObserver = msg -> {
             if (mActivityAboutCanadaBinding.swipeRefreshLayout.isRefreshing())
                 mActivityAboutCanadaBinding.swipeRefreshLayout.setRefreshing(false);
 
             if (msg != null)
                 AboutCanadaActivity.this.showSnackBar(mActivityAboutCanadaBinding.rootLayout, msg);
-        });
-
+        };
     }
 
     /*

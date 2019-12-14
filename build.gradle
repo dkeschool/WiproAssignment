@@ -31,6 +31,7 @@ ext {
     retrofit_rx_adapter = '1.0.0'
     lifecycle_version = "1.1.1"
     sdp_lib_version = "1.0.6"
+    picasso_lib_version = '2.71828'
 
 }
 
