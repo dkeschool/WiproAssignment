@@ -12,12 +12,17 @@ public class NetworkUtil {
     private final String TAG = NetworkUtil.class.getSimpleName();
     private Context _mContext;
 
+    /**
+     * Parameterised constructor
+     *
+     * @param context
+     * */
     public NetworkUtil(Context context) {
         this._mContext = context;
     }
 
     /*
-    * Method to check if Network is available or not
+    * Method to check if the Network is available or not
     * */
     public boolean isNetworkAvailable() {
         try {

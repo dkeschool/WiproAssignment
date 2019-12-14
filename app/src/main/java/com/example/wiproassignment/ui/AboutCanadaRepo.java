@@ -20,43 +20,60 @@ public class AboutCanadaRepo {
     private ApiInterface mApiInterface;
     private BaseSchedulerProvider mSchedulerProvider;
 
-    public AboutCanadaRepo(MyApplication application, NetworkUtil internetUtil, ApiInterface apiInterface, BaseSchedulerProvider baseSchedulerProvider) {
-        this.mNetworkUtil = internetUtil;
+    /**
+     * Parametrised Constructor
+     *
+     * @param application  MyApplication class inatance
+     * @param network      Network util class instance
+     * @param apiInterface ApiInterface class insance to About Canada APi
+     * @param baseSchedulerProvider Base Scheduler to hit API in Background thread and get result into main thread
+     * */
+    public AboutCanadaRepo(MyApplication application, NetworkUtil network, ApiInterface apiInterface, BaseSchedulerProvider baseSchedulerProvider) {
+        this.mNetworkUtil = network;
         this.mMyApplication = application;
         this.mApiInterface = apiInterface;
         this.mSchedulerProvider = baseSchedulerProvider;
     }
 
-    /*
+    /**
      * Method to call About Canada API and get List Items
+     *
+     * @param aboutCanadaRespModelLiveData  AboutCanadaResponseModelLiveData to notify the observers when APi hits successfully, with
+*                                      proper parsed response
+     *
+     * @param mutableIsLoadingStateLiveData  mutableIsLoadingStateLiveData to notify the observers when we APi hitting starts
+ *                                     and when it ends.
+     *
+     *  @param mutableErrorMessageLiveData   mutableErrorMessageLiveData to notify the observers when we get any error while
+     *                                 hitting the API
      * */
     @SuppressLint("CheckResult")
-    public void hitAboutCanadaApi(MutableLiveData<AboutCanadaResponseModel> aboutCanadaRespModel,
-                                  MutableLiveData<Boolean> mutableIsLoadingState, MutableLiveData<String> mutableErrorData) {
+    public void hitAboutCanadaApi(MutableLiveData<AboutCanadaResponseModel> aboutCanadaRespModelLiveData,
+          MutableLiveData<Boolean> mutableIsLoadingStateLiveData, MutableLiveData<String> mutableErrorMessageLiveData) {
 
-        mutableIsLoadingState.setValue(true);
+        mutableIsLoadingStateLiveData.setValue(true);
 
         if (!mNetworkUtil.isNetworkAvailable()) {
-            mutableIsLoadingState.setValue(false);
-            mutableErrorData.setValue(mMyApplication.getResources().getString(R.string.no_internet));
+            mutableIsLoadingStateLiveData.setValue(false);
+            mutableErrorMessageLiveData.setValue(mMyApplication.getResources().getString(R.string.no_internet));
         } else {
 
-            mApiInterface.getExerciseList().subscribeOn(mSchedulerProvider.ioWorker())
+            mApiInterface.getAboutCanadaList().subscribeOn(mSchedulerProvider.ioWorker())
                 .observeOn(mSchedulerProvider.mainThread())
                 .subscribeWith(new DisposableObserver<AboutCanadaResponseModel>() {
                     @Override
                     public void onNext(AboutCanadaResponseModel aboutCanadaResponseModel) {
-                        mutableIsLoadingState.setValue(false);
+                        mutableIsLoadingStateLiveData.setValue(false);
                         if (aboutCanadaResponseModel != null) {
                             /*
                             * Setting response model after getting the result
                             * */
-                            aboutCanadaRespModel.setValue(aboutCanadaResponseModel);
+                            aboutCanadaRespModelLiveData.setValue(aboutCanadaResponseModel);
                         } else {
                             /*
                             * Setting Error state if response model is null
                             * */
-                            mutableErrorData.setValue(mMyApplication.getResources().getString(R.string.error_try_again_later));
+                            mutableErrorMessageLiveData.setValue(mMyApplication.getResources().getString(R.string.error_try_again_later));
                         }
                     }
                     @Override
@@ -64,8 +81,8 @@ public class AboutCanadaRepo {
                         /*
                          * Setting Error if request failed
                          * */
-                        mutableIsLoadingState.setValue(false);
-                        mutableErrorData.setValue(e.getMessage());
+                        mutableIsLoadingStateLiveData.setValue(false);
+                        mutableErrorMessageLiveData.setValue(e.getMessage());
                     }
                     @Override
                     public void onComplete() {}

@@ -12,12 +12,14 @@ public class AboutCanadaViewModel extends ViewModel {
 
     private AboutCanadaRepo mAboutCanadaRepo;
     private MutableLiveData<Boolean> mMutableIsLoading;
-    private MutableLiveData<String> mMutableErrorData;
+    private MutableLiveData<String> mMutableErrorMessage;
     private MutableLiveData<AboutCanadaResponseModel> mAboutCanadaResponseModel;
 
-    /*
-    * Parameterised constructor
-    * */
+    /**
+     * Parameterised constructor
+     *
+     * @param aboutCanadaRepo  AboutCanadaRespository object
+     * */
     public AboutCanadaViewModel(AboutCanadaRepo aboutCanadaRepo) {
         this.mAboutCanadaRepo = aboutCanadaRepo;
         initLiveData();
@@ -27,7 +29,7 @@ public class AboutCanadaViewModel extends ViewModel {
      * Method to initLiveData's
      * */
     public void initLiveData() {
-        mMutableErrorData = new MutableLiveData<>();
+        mMutableErrorMessage = new MutableLiveData<>();
         mMutableIsLoading = new MutableLiveData<>();
         mAboutCanadaResponseModel = new MutableLiveData<>();
     }
@@ -36,7 +38,7 @@ public class AboutCanadaViewModel extends ViewModel {
      * Method used to hit About Canada api after checking validations
      **/
     public void hitAboutCanadaApi() {
-        mAboutCanadaRepo.hitAboutCanadaApi(mAboutCanadaResponseModel, mMutableIsLoading, mMutableErrorData);
+        mAboutCanadaRepo.hitAboutCanadaApi(mAboutCanadaResponseModel, mMutableIsLoading, mMutableErrorMessage);
     }
 
     /**
@@ -57,7 +59,7 @@ public class AboutCanadaViewModel extends ViewModel {
      * Method to get Error state
      * */
     public MutableLiveData<String> getErrorMessageLiveData() {
-        return mMutableErrorData;
+        return mMutableErrorMessage;
     }
 
 }

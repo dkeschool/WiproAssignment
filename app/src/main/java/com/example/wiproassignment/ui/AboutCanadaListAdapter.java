@@ -31,6 +31,10 @@ public class AboutCanadaListAdapter extends ListAdapter<AboutCanadaListItemModel
 
     private Context mContext;
 
+    /**
+    * Parameterised Constructor
+    * @param context  Context of the Activity
+    * */
     public AboutCanadaListAdapter(Context context) {
         super(aboutCanadaListItemModelItemCallback);
         mContext = context;
@@ -46,10 +50,12 @@ public class AboutCanadaListAdapter extends ListAdapter<AboutCanadaListItemModel
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
-        AboutCanadaViewHolder holder = (AboutCanadaViewHolder)viewHolder;
-        holder.bindDataWithView(position);
+        ((AboutCanadaViewHolder)viewHolder).bindDataWithView(position);
     }
 
+    /*
+    * View Holder Class of the RecyclerView item List
+    * */
     public class AboutCanadaViewHolder extends RecyclerView.ViewHolder {
 
         private ItemExerciseListBinding itemExerciseListBinding;
@@ -59,6 +65,9 @@ public class AboutCanadaListAdapter extends ListAdapter<AboutCanadaListItemModel
             this.itemExerciseListBinding = itemExerciseListBinding;
         }
 
+        /*
+        * Method to bind list item data into view
+        * */
         private void bindDataWithView(int position) {
             AboutCanadaListItemModel exercise = getItem(position);
             itemExerciseListBinding.setListitem(exercise);
