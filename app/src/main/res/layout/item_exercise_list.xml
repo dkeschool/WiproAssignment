@@ -7,7 +7,7 @@
 
         <variable
             name="listitem"
-            type="com.example.wiproassignment.models.CanadaListItemModel" />
+            type="com.example.wiproassignment.models.AboutCanadaListItemModel" />
 
     </data>
 

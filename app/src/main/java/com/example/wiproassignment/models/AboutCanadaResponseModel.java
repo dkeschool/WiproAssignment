@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class CanadaDataModel {
+public class AboutCanadaResponseModel {
 
     @SerializedName("id")
     @Expose
@@ -15,7 +15,7 @@ public class CanadaDataModel {
     private String mTitle;
     @SerializedName("rows")
     @Expose
-    private ArrayList<CanadaListItemModel> mRowitems;
+    private ArrayList<AboutCanadaListItemModel> mRowitems;
 
     public int getId() {
         return mId;
@@ -33,14 +33,14 @@ public class CanadaDataModel {
         this.mTitle = title;
     }
 
-    public ArrayList<CanadaListItemModel> getRows() {
+    public ArrayList<AboutCanadaListItemModel> getRows() {
         if (mRowitems == null) {
             mRowitems = new ArrayList<>();
         }
         return mRowitems;
     }
 
-    public void setRows(ArrayList<CanadaListItemModel> rows) {
+    public void setRows(ArrayList<AboutCanadaListItemModel> rows) {
         this.mRowitems = rows;
     }
 

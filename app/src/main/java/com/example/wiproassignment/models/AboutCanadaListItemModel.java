@@ -1,6 +1,6 @@
 package com.example.wiproassignment.models;
 
-public class CanadaListItemModel {
+public class AboutCanadaListItemModel {
 
     private String title;
     private String description;
