@@ -16,9 +16,11 @@ import com.example.wiproassignment.R;
 import com.example.wiproassignment.databinding.ItemExerciseListBinding;
 import com.example.wiproassignment.models.AboutCanadaListItemModel;
 
+import java.util.Objects;
+
 public class AboutCanadaListAdapter extends ListAdapter<AboutCanadaListItemModel, RecyclerView.ViewHolder> {
 
-    public static final DiffUtil.ItemCallback<AboutCanadaListItemModel> aboutCanadaListItemModelItemCallback =
+    private static final DiffUtil.ItemCallback<AboutCanadaListItemModel> aboutCanadaListItemModelItemCallback =
         new DiffUtil.ItemCallback<AboutCanadaListItemModel>() {
             @Override
             public boolean areItemsTheSame(@NonNull AboutCanadaListItemModel t1, @NonNull AboutCanadaListItemModel t2) {
@@ -37,7 +39,7 @@ public class AboutCanadaListAdapter extends ListAdapter<AboutCanadaListItemModel
     * Parameterised Constructor
     * @param context  Context of the Activity
     * */
-    public AboutCanadaListAdapter(Context context) {
+    AboutCanadaListAdapter(Context context) {
         super(aboutCanadaListItemModelItemCallback);
         mContext = context;
     }
@@ -52,7 +54,7 @@ public class AboutCanadaListAdapter extends ListAdapter<AboutCanadaListItemModel
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
-        ((AboutCanadaViewHolder)viewHolder).bindDataWithView(position);
+        ((AboutCanadaViewHolder) Objects.requireNonNull(viewHolder)).bindDataWithView(position);
     }
 
     /*

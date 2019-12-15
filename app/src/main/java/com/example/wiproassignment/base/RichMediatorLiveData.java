@@ -6,7 +6,7 @@ import android.arch.lifecycle.Observer;
 
 public abstract class RichMediatorLiveData<T> extends MediatorLiveData<T> {
 
-    private MutableLiveData<String> errorLiveData = new MutableLiveData<>();;
+    private MutableLiveData<String> errorLiveData = new MutableLiveData<>();
 
     protected abstract Observer<String> getErrorObserver();
 

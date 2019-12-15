@@ -1,14 +1,10 @@
 package com.example.wiproassignment.ui;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
-import android.util.Patterns;
-
-import com.example.wiproassignment.R;
 import com.example.wiproassignment.base.RichMediatorLiveData;
-import com.example.wiproassignment.models.AboutCanadaResponseModel;;
+import com.example.wiproassignment.models.AboutCanadaResponseModel;
 
 public class AboutCanadaViewModel extends ViewModel {
 
@@ -31,7 +27,7 @@ public class AboutCanadaViewModel extends ViewModel {
     /*
     * Method to initialise and set observers
     * */
-    public void setGenericListeners(Observer<String> errorObserver) {
+    void setGenericListeners(Observer<String> errorObserver) {
         this.mErrorObserver = errorObserver;
         initLiveData();
     }
@@ -39,7 +35,7 @@ public class AboutCanadaViewModel extends ViewModel {
     /*
      * Method to initLiveData's
      * */
-    public void initLiveData() {
+    private void initLiveData() {
         if (mAboutCanadaResponseLiveData == null) {
             mAboutCanadaResponseLiveData = new RichMediatorLiveData<AboutCanadaResponseModel>() {
                 @Override
@@ -54,21 +50,21 @@ public class AboutCanadaViewModel extends ViewModel {
     /**
      * Method used to hit About Canada api after checking validations
      **/
-    public void hitAboutCanadaApi() {
+    void hitAboutCanadaApi() {
         mAboutCanadaRepo.hitAboutCanadaApi(mAboutCanadaResponseLiveData, mIsLoadingLiveData);
     }
 
     /**
     * Method to call About Canada API and get List Items
     * */
-    public MutableLiveData<AboutCanadaResponseModel> getAboutCanadaResponseLiveData() {
+    MutableLiveData<AboutCanadaResponseModel> getAboutCanadaResponseLiveData() {
         return mAboutCanadaResponseLiveData;
     }
 
     /*
     * Method to get Loading state to know whether API is hitting or not
     * */
-    public MutableLiveData<Boolean> getLoadingStateLiveData() {
+    MutableLiveData<Boolean> getLoadingStateLiveData() {
         return  mIsLoadingLiveData;
     }
 

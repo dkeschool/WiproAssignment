@@ -5,7 +5,6 @@ import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.example.wiproassignment.R;
-import com.example.wiproassignment.application.MyApplication;
 import com.example.wiproassignment.base.RichMediatorLiveData;
 import com.example.wiproassignment.models.AboutCanadaResponseModel;
 import com.example.wiproassignment.network.ApiInterface;

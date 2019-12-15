@@ -3,10 +3,8 @@ package com.example.wiproassignment.ui;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,6 +18,8 @@ import com.example.wiproassignment.utils.NetworkUtil;
 import com.example.wiproassignment.utils.SchedulerProvider.BaseSchedulerProvider;
 import com.example.wiproassignment.utils.SchedulerProvider.SchedulerProvider;
 import com.example.wiproassignment.utils.ViewModelFactory;
+
+import java.util.Objects;
 
 public class AboutCanadaActivity extends BaseActivity {
 
@@ -130,7 +130,7 @@ public class AboutCanadaActivity extends BaseActivity {
     * */
     private void recyclerViewSetup() {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.bg_recycler_separator));
+        dividerItemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(this, R.drawable.bg_recycler_separator)));
         mActivityAboutCanadaBinding.rvAboutCanadaList.addItemDecoration(dividerItemDecoration);
 
         mAboutCanadaListAdapter = new AboutCanadaListAdapter(this);

@@ -1,7 +1,5 @@
 package com.example.wiproassignment.models;
 
-import android.support.annotation.Nullable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -23,16 +21,8 @@ public class AboutCanadaResponseModel {
         return mId;
     }
 
-    public void setId(int id) {
-        this.mId = id;
-    }
-
     public String getTitle() {
         return mTitle;
-    }
-
-    public void setTitle(String title) {
-        this.mTitle = title;
     }
 
     public ArrayList<AboutCanadaListItemModel> getRows() {
@@ -41,9 +31,4 @@ public class AboutCanadaResponseModel {
         }
         return mRowitems;
     }
-
-    public void setRows(ArrayList<AboutCanadaListItemModel> rows) {
-        this.mRowitems = rows;
-    }
-
 }
