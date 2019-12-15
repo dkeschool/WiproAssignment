@@ -32,6 +32,8 @@ ext {
     lifecycle_version = "1.1.1"
     sdp_lib_version = "1.0.6"
     glide_lib_version = '4.9.0'
+    mockito_version = '2.13.0'
+    mock_server_version = '3.12.1'
 
 }
 

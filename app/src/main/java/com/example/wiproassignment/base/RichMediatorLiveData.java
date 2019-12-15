@@ -6,13 +6,9 @@ import android.arch.lifecycle.Observer;
 
 public abstract class RichMediatorLiveData<T> extends MediatorLiveData<T> {
 
-    private MutableLiveData<String> errorLiveData;
+    private MutableLiveData<String> errorLiveData = new MutableLiveData<>();;
 
     protected abstract Observer<String> getErrorObserver();
-
-    private void initLiveData() {
-        errorLiveData = new MutableLiveData<>();
-    }
 
     @Override
     protected void onInactive() {
@@ -23,7 +19,6 @@ public abstract class RichMediatorLiveData<T> extends MediatorLiveData<T> {
     @Override
     protected void onActive() {
         super.onActive();
-        initLiveData();
         addSource(errorLiveData, getErrorObserver());
     }
 

@@ -114,9 +114,9 @@ public class AboutCanadaActivity extends BaseActivity {
         // observing loading state here
         mAboutCanadaViewModel.getLoadingStateLiveData().observe(this, isLoading -> {
             if (isLoading != null && isLoading)
-                mActivityAboutCanadaBinding.textViewLoading.setVisibility(View.VISIBLE);
+                mActivityAboutCanadaBinding.tvLoading.setVisibility(View.VISIBLE);
             else
-                mActivityAboutCanadaBinding.textViewLoading.setVisibility(View.GONE);
+                mActivityAboutCanadaBinding.tvLoading.setVisibility(View.GONE);
         });
 
         // Creating Observer of Error
@@ -135,10 +135,10 @@ public class AboutCanadaActivity extends BaseActivity {
     private void recyclerViewSetup() {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.bg_recycler_separator));
-        mActivityAboutCanadaBinding.recyclerViewExercise.addItemDecoration(dividerItemDecoration);
+        mActivityAboutCanadaBinding.rvAboutCanadaList.addItemDecoration(dividerItemDecoration);
 
         mAboutCanadaListAdapter = new AboutCanadaListAdapter(this);
-        mActivityAboutCanadaBinding.recyclerViewExercise.setAdapter(mAboutCanadaListAdapter);
+        mActivityAboutCanadaBinding.rvAboutCanadaList.setAdapter(mAboutCanadaListAdapter);
     }
 
 }

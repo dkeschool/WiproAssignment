@@ -64,4 +64,17 @@ dependencies {
     // image display and cache
     implementation "com.github.bumptech.glide:glide:$glide_lib_version"
 
+    // provides support for multiple size phone
+    implementation "com.intuit.sdp:sdp-android:$sdp_lib_version"
+
+    // library for mock objects in testing
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    androidTestImplementation "org.mockito:mockito-android:$mockito_version"
+
+    // mock server api test
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$mock_server_version"
+
+    // library for test helpers
+    testImplementation "android.arch.core:core-testing:$lifecycle_version"
+
 }

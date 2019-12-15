@@ -12,7 +12,7 @@ public class ApiClient {
     /**
     * Method to create Retrofit client to hit API's
      *
-     * @param baseUrl Base url of the API's
+     * @param baseUrl   Base url of the API's
     * */
     public static Retrofit getClient(String baseUrl) {
 

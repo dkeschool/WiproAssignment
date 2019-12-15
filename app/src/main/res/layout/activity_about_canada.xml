@@ -22,7 +22,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerViewExercise"
+                android:id="@+id/rvAboutCanadaList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -32,7 +32,7 @@
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <TextView
-            android:id="@+id/textViewLoading"
+            android:id="@+id/tvLoading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/please_wait"
