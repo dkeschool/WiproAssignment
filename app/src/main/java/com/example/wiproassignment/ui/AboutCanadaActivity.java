@@ -43,18 +43,18 @@ public class AboutCanadaActivity extends BaseActivity {
 
         // initialize view model using view model factory
         mAboutCanadaViewModel = ViewModelProviders.of(this,
-                new ViewModelFactory(new AboutCanadaRepo(MyApplication.getApplicationInstance(), mNetworkUtil,
+                new ViewModelFactory(new AboutCanadaRepo(getApplication(), mNetworkUtil,
                 mApiInterface, mBaseSchedulerProvider))).get(AboutCanadaViewModel.class);
         mAboutCanadaViewModel.setGenericListeners(getmErrorObserver());
 
         // setting toolbar
         toolbarSetup(mActivityAboutCanadaBinding.toolbar.toolbarCommon);
 
-        // setting recycler view and attaching adapter to it
-        recyclerViewSetup();
-
         // observing data and set it into recycler view
         observeViewModelData();
+
+        // setting recycler view and attaching adapter to it
+        recyclerViewSetup();
 
         // setting pull to refresh for updated data
         pullToRefreshSetup();
@@ -71,6 +71,15 @@ public class AboutCanadaActivity extends BaseActivity {
         mNetworkUtil = new NetworkUtil(this);
         mApiInterface = MyApplication.getApplicationInstance().getApiInterface();
         mBaseSchedulerProvider = new SchedulerProvider();
+
+        // Creating Observer of Error
+        mErrorObserver = msg -> {
+            if (mActivityAboutCanadaBinding.swipeRefreshLayout.isRefreshing())
+                mActivityAboutCanadaBinding.swipeRefreshLayout.setRefreshing(false);
+
+            if (msg != null)
+                AboutCanadaActivity.this.showSnackBar(mActivityAboutCanadaBinding.rootLayout, msg);
+        };
     }
 
     /*
@@ -78,11 +87,6 @@ public class AboutCanadaActivity extends BaseActivity {
     * */
     public Observer<String> getmErrorObserver() {
         return mErrorObserver;
-    }
-
-    @Override
-    protected int getResourceId() {
-        return 0;
     }
 
     /*
@@ -119,14 +123,6 @@ public class AboutCanadaActivity extends BaseActivity {
                 mActivityAboutCanadaBinding.tvLoading.setVisibility(View.GONE);
         });
 
-        // Creating Observer of Error
-        mErrorObserver = msg -> {
-            if (mActivityAboutCanadaBinding.swipeRefreshLayout.isRefreshing())
-                mActivityAboutCanadaBinding.swipeRefreshLayout.setRefreshing(false);
-
-            if (msg != null)
-                AboutCanadaActivity.this.showSnackBar(mActivityAboutCanadaBinding.rootLayout, msg);
-        };
     }
 
     /*

@@ -1,6 +1,7 @@
 package com.example.wiproassignment.ui;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.example.wiproassignment.R;
@@ -15,7 +16,7 @@ import io.reactivex.observers.DisposableObserver;
 
 public class AboutCanadaRepo {
 
-    private MyApplication mMyApplication;
+    private Application mMyApplication;
     private NetworkUtil mNetworkUtil;
     
     private ApiInterface mApiInterface;
@@ -29,7 +30,7 @@ public class AboutCanadaRepo {
      * @param apiInterface ApiInterface class insance to About Canada APi
      * @param baseSchedulerProvider Base Scheduler to hit API in Background thread and get result into main thread
      * */
-    public AboutCanadaRepo(MyApplication application, NetworkUtil network, ApiInterface apiInterface, BaseSchedulerProvider baseSchedulerProvider) {
+    public AboutCanadaRepo(Application application, NetworkUtil network, ApiInterface apiInterface, BaseSchedulerProvider baseSchedulerProvider) {
         this.mNetworkUtil = network;
         this.mMyApplication = application;
         this.mApiInterface = apiInterface;
