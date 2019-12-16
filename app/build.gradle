@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.wiproassignment"
+        applicationId "com.task.wiproassignment"
         minSdkVersion 25
         targetSdkVersion 28
         versionCode 1
@@ -76,5 +76,8 @@ dependencies {
 
     // library for test helpers
     testImplementation "android.arch.core:core-testing:$lifecycle_version"
+
+    // library for card view
+    implementation "com.android.support:cardview-v7:$cardview_version"
 
 }

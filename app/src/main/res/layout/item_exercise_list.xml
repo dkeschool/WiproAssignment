@@ -7,44 +7,60 @@
 
         <variable
             name="listitem"
-            type="com.example.wiproassignment.models.AboutCanadaListItemModel" />
+            type="com.task.wiproassignment.models.AboutCanadaListItemModel" />
 
     </data>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/ct_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_10sdp">
+        android:padding="@dimen/_5sdp">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tvTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/_10sdp"
-            android:text='@{listitem.title  ??  @string/not_available }'
-            android:textColor="@color/colorMediumPurple"
-            android:textSize="@dimen/_15sdp"
-            tools:text="Murdochs need counselling after hacking scandal, says magzine"
-            tools:ignore="MissingConstraints" />
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_container"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/ivHref"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_60sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tvDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{listitem.description ?? @string/not_available}"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/_10sdp"
-            app:layout_constraintEnd_toStartOf="@id/ivHref"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            tools:text="NEW YORK: The british phone The british phone-hacking scandal brought simmering tensions." />
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text='@{listitem.title  ??  @string/not_available }'
+                    android:textColor="@color/colorMediumPurple"
+                    android:textSize="@dimen/_15sdp"
+                    tools:ignore="MissingConstraints" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/ivHref"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{listitem.description ?? @string/not_available}"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintEnd_toStartOf="@id/ivHref"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
 
     </android.support.constraint.ConstraintLayout>
 
