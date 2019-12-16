@@ -58,7 +58,7 @@ public class AboutCanadaActivityTest {
         activityTestRule.launchActivity(new Intent());
 
         Espresso.onView(withId(R.id.tvLoading)).check(matches(not(isDisplayed())));
-        Espresso.onView(withId(R.id.tvLoading)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.id.rvAboutCanadaList)).check(matches(isDisplayed()));
         Espresso.onView(withId(R.id.toolbar)).check(matches(hasDescendant(withText("About Canada"))));
 
     }
@@ -72,10 +72,10 @@ public class AboutCanadaActivityTest {
     @Test
     public void scrollToBottomRecyclerViewTest() {
 
-        RecyclerView recyclerView = aboutCanadaActivity.findViewById(R.id.tvLoading);
+        RecyclerView recyclerView = aboutCanadaActivity.findViewById(R.id.rvAboutCanadaList);
 
         if (getRowViewCount(recyclerView) > 0) {
-            onView(withId(R.id.tvLoading))
+            onView(withId(R.id.rvAboutCanadaList))
                     .perform(RecyclerViewActions.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1));
         }
     }
