@@ -4,8 +4,8 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import com.task.wiproassignment.ui.AboutCanadaRepo;
-import com.task.wiproassignment.ui.AboutCanadaViewModel;
+import com.task.wiproassignment.ui.aboutCanada.AboutCanadaRepo;
+import com.task.wiproassignment.ui.aboutCanada.AboutCanadaViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
 

@@ -1,7 +1,8 @@
-package com.task.wiproassignment.models;
+package com.task.wiproassignment.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.task.wiproassignment.pojo.AboutCanadaListItemModel;
 
 import java.util.ArrayList;
 

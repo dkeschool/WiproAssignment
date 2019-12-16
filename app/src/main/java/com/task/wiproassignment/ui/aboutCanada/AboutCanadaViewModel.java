@@ -1,10 +1,10 @@
-package com.task.wiproassignment.ui;
+package com.task.wiproassignment.ui.aboutCanada;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import com.task.wiproassignment.base.RichMediatorLiveData;
-import com.task.wiproassignment.models.AboutCanadaResponseModel;
+import com.task.wiproassignment.pojo.AboutCanadaResponseModel;
 
 public class AboutCanadaViewModel extends ViewModel {
 

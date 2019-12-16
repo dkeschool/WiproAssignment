@@ -10,7 +10,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.task.wiproassignment.ui.AboutCanadaActivity;
+import com.task.wiproassignment.ui.aboutCanada.AboutCanadaActivity;
 
 import org.hamcrest.Matcher;
 import org.junit.After;

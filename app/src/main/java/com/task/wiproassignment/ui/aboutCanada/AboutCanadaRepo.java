@@ -1,4 +1,4 @@
-package com.task.wiproassignment.ui;
+package com.task.wiproassignment.ui.aboutCanada;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -7,8 +7,8 @@ import android.text.TextUtils;
 
 import com.task.wiproassignment.R;
 import com.task.wiproassignment.base.RichMediatorLiveData;
-import com.task.wiproassignment.models.AboutCanadaListItemModel;
-import com.task.wiproassignment.models.AboutCanadaResponseModel;
+import com.task.wiproassignment.pojo.AboutCanadaListItemModel;
+import com.task.wiproassignment.pojo.AboutCanadaResponseModel;
 import com.task.wiproassignment.network.ApiInterface;
 import com.task.wiproassignment.utils.NetworkUtil;
 import com.task.wiproassignment.utils.SchedulerProvider.BaseSchedulerProvider;

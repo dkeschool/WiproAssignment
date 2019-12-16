@@ -1,4 +1,4 @@
-package com.task.wiproassignment.ui;
+package com.task.wiproassignment.ui.aboutCanada;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -9,7 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.task.wiproassignment.adapters.AboutCanadaListAdapter;
+import com.task.wiproassignment.ui.adapters.AboutCanadaListAdapter;
 import com.task.wiproassignment.databinding.ActivityAboutCanadaBinding;
 import com.task.wiproassignment.R;
 import com.task.wiproassignment.application.MyApplication;

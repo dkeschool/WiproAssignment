@@ -1,6 +1,5 @@
 package com.task.wiproassignment;
 
-import android.app.Application;
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
@@ -10,10 +9,10 @@ import android.support.annotation.Nullable;
 
 import com.task.wiproassignment.application.MyApplication;
 import com.task.wiproassignment.base.RichMediatorLiveData;
-import com.task.wiproassignment.models.AboutCanadaListItemModel;
-import com.task.wiproassignment.models.AboutCanadaResponseModel;
+import com.task.wiproassignment.pojo.AboutCanadaListItemModel;
+import com.task.wiproassignment.pojo.AboutCanadaResponseModel;
 import com.task.wiproassignment.network.ApiInterface;
-import com.task.wiproassignment.ui.AboutCanadaRepo;
+import com.task.wiproassignment.ui.aboutCanada.AboutCanadaRepo;
 import com.task.wiproassignment.utils.NetworkUtil;
 import com.task.wiproassignment.utils.SchedulerProvider.SchedulerProviderTest;
 
@@ -39,7 +38,6 @@ import io.reactivex.observers.TestObserver;
 import io.reactivex.plugins.RxJavaPlugins;
 
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 public class AboutCanadaRepoTest {

@@ -1,6 +1,6 @@
 package com.task.wiproassignment.network;
 
-import com.task.wiproassignment.models.AboutCanadaResponseModel;
+import com.task.wiproassignment.pojo.AboutCanadaResponseModel;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

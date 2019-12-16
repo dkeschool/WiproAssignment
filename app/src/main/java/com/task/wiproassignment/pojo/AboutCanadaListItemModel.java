@@ -1,4 +1,4 @@
-package com.task.wiproassignment.models;
+package com.task.wiproassignment.pojo;
 
 import android.support.annotation.Nullable;
 import com.google.gson.annotations.Expose;

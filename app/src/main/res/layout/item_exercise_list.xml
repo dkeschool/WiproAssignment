@@ -7,7 +7,7 @@
 
         <variable
             name="listitem"
-            type="com.task.wiproassignment.models.AboutCanadaListItemModel" />
+            type="com.task.wiproassignment.pojo.AboutCanadaListItemModel" />
 
     </data>
 

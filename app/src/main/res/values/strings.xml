@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WiproAssignment</string>
+    <string name="app_name">About Canada</string>
     <string name="unable_to_check_net">Unable to check Internet availability</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="error_try_again_later">Error occurred! Please try again later.</string>

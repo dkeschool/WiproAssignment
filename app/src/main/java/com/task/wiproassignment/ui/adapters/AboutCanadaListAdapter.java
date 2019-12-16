@@ -1,4 +1,4 @@
-package com.task.wiproassignment.adapters;
+package com.task.wiproassignment.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.task.wiproassignment.R;
 import com.task.wiproassignment.databinding.ItemExerciseListBinding;
-import com.task.wiproassignment.models.AboutCanadaListItemModel;
+import com.task.wiproassignment.pojo.AboutCanadaListItemModel;
 
 import java.util.Objects;
 
