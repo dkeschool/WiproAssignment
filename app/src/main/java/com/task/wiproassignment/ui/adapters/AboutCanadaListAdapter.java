@@ -1,7 +1,6 @@
 package com.task.wiproassignment.ui.adapters;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.recyclerview.extensions.ListAdapter;
@@ -33,23 +32,18 @@ public class AboutCanadaListAdapter extends ListAdapter<AboutCanadaListItemModel
             }
         };
 
-    private Context mContext;
-
     /**
     * Parameterised Constructor
-    * @param context  Context of the Activity
     * */
-    public AboutCanadaListAdapter(Context context) {
+    public AboutCanadaListAdapter() {
         super(aboutCanadaListItemModelItemCallback);
-        mContext = context;
     }
 
     @NonNull
     @Override
     public AboutCanadaViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        ItemExerciseListBinding itemExerciseListBinding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()),
-            R.layout.item_exercise_list, viewGroup, false);
-        return new AboutCanadaViewHolder(itemExerciseListBinding);
+        return new AboutCanadaViewHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()),
+            R.layout.item_exercise_list, viewGroup, false));
     }
 
     @Override
@@ -80,12 +74,12 @@ public class AboutCanadaListAdapter extends ListAdapter<AboutCanadaListItemModel
             if (item.getImageHref() == null || item.getImageHref().trim().isEmpty())
                 mItemExerciseListBinding.ivHref.setImageResource(R.drawable.placeholder_iamge);
             else {
-                Glide.with(mContext).load(item.getImageHref().replace("http","https"))
-                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                        .placeholder(R.drawable.placeholder_iamge)
-                        .into(mItemExerciseListBinding.ivHref);
+                Glide.with(mItemExerciseListBinding.ivHref.getContext())
+                    .load(item.getImageHref().replace("http","https"))
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .placeholder(R.drawable.placeholder_iamge)
+                    .into(mItemExerciseListBinding.ivHref);
             }
-
         }
     }
 

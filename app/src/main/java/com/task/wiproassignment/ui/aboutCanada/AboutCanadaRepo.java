@@ -14,7 +14,6 @@ import com.task.wiproassignment.utils.NetworkUtil;
 import com.task.wiproassignment.utils.SchedulerProvider.BaseSchedulerProvider;
 
 import java.util.ArrayList;
-
 import io.reactivex.observers.DisposableObserver;
 
 public class AboutCanadaRepo {
@@ -47,7 +46,7 @@ public class AboutCanadaRepo {
 *                                      proper parsed response and notify with proper msg with gets any error
      *
      * @param mutableIsLoadingStateLiveData  mutableIsLoadingStateLiveData to notify the observers when we APi hitting starts
- *                                     and when it ends.
+     *                                 and when it ends.
      *
      * */
     @SuppressLint("CheckResult")
@@ -68,10 +67,12 @@ public class AboutCanadaRepo {
                     public void onNext(AboutCanadaResponseModel aboutCanadaResponseModel) {
                         mutableIsLoadingStateLiveData.setValue(false);
                         if (aboutCanadaResponseModel != null) {
-
-                            // Removing items having all the values as null
+                            /*
+                             * Removing items having all the values as null
+                             * */
                             if(aboutCanadaResponseModel.getRows()!=null)
                                 removingNullItems(aboutCanadaResponseModel.getRows());
+
                             /*
                             * Setting response model after getting the result
                             * */
@@ -98,12 +99,14 @@ public class AboutCanadaRepo {
 
     }
 
-    /*
+    /**
     * Method to remove items from list which are having all the 3 items as null
+    *
+    * @param mList AboutCanada List which is needed to be filter from null items
     * */
     private void removingNullItems(ArrayList<AboutCanadaListItemModel> mList) {
-        for(int i=0; i<mList.size(); i++)
-            if(TextUtils.isEmpty(mList.get(i).getTitle()) && TextUtils.isEmpty(mList.get(i).getDescription()) &&
+        for (int i = 0; i < mList.size(); i++)
+            if (TextUtils.isEmpty(mList.get(i).getTitle()) && TextUtils.isEmpty(mList.get(i).getDescription()) &&
                     TextUtils.isEmpty(mList.get(i).getImageHref())) {
                 mList.remove(i);
                 i--;

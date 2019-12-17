@@ -3,9 +3,7 @@ package com.task.wiproassignment.ui.aboutCanada;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
-import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -20,7 +18,6 @@ import com.task.wiproassignment.utils.SchedulerProvider.BaseSchedulerProvider;
 import com.task.wiproassignment.utils.SchedulerProvider.SchedulerProvider;
 import com.task.wiproassignment.utils.ViewModelFactory;
 
-import java.util.Objects;
 
 public class AboutCanadaActivity extends BaseActivity {
 
@@ -130,11 +127,7 @@ public class AboutCanadaActivity extends BaseActivity {
     * Method to setup the recycler view of About Canda items
     * */
     private void recyclerViewSetup() {
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(this, R.drawable.bg_recycler_separator)));
-        mActivityAboutCanadaBinding.rvAboutCanadaList.addItemDecoration(dividerItemDecoration);
-
-        mAboutCanadaListAdapter = new AboutCanadaListAdapter(this);
+        mAboutCanadaListAdapter = new AboutCanadaListAdapter();
         mActivityAboutCanadaBinding.rvAboutCanadaList.setAdapter(mAboutCanadaListAdapter);
     }
 

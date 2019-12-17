@@ -20,6 +20,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         this.mAboutCanadaRepo = aboutCanadaRepo;
     }
 
+    @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (AboutCanadaViewModel.class.isAssignableFrom(modelClass)) {
