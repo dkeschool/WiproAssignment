@@ -24,7 +24,7 @@ It is an Android app which:
 Technical Feature:
 -----------------
 
-1- It has used the recycler view for smooth scrolling of the list.
+1- Used the recycler view for smooth scrolling of the list.
 
 2- Glide for fast image loading with disk cache management and resource pooling in a simple and easy way.
 
