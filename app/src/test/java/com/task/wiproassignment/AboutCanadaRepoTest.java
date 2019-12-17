@@ -37,9 +37,6 @@ import io.reactivex.internal.schedulers.ExecutorScheduler;
 import io.reactivex.observers.TestObserver;
 import io.reactivex.plugins.RxJavaPlugins;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-
 public class AboutCanadaRepoTest {
 
     /*

@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Objects;
 import okhttp3.mockwebserver.MockWebServer;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -38,7 +39,7 @@ public class AboutCanadaActivityTest {
     private MockWebServer webServer;
 
     @Rule
-    public ActivityTestRule<AboutCanadaActivity> activityTestRule = new ActivityTestRule<AboutCanadaActivity>(AboutCanadaActivity.class);
+    public ActivityTestRule<AboutCanadaActivity> activityTestRule = new ActivityTestRule<>(AboutCanadaActivity.class);
 
     private AboutCanadaActivity aboutCanadaActivity;
 
@@ -76,7 +77,7 @@ public class AboutCanadaActivityTest {
 
         if (getRowViewCount(recyclerView) > 0) {
             onView(withId(R.id.rvAboutCanadaList))
-                    .perform(RecyclerViewActions.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1));
+                    .perform(RecyclerViewActions.scrollToPosition(Objects.requireNonNull(recyclerView.getAdapter()).getItemCount() - 1));
         }
     }
 
@@ -89,7 +90,7 @@ public class AboutCanadaActivityTest {
     }
 
     private int getRowViewCount(RecyclerView recyclerView) {
-        return recyclerView.getAdapter().getItemCount();
+        return Objects.requireNonNull(recyclerView.getAdapter()).getItemCount();
     }
 
     public static ViewAction withConstraints(final ViewAction action, final Matcher<View> constraints) {
