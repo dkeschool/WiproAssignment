@@ -1,6 +1,9 @@
 package com.task.wiproassignment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
@@ -20,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 
+import java.lang.reflect.Field;
 import java.util.Objects;
 import okhttp3.mockwebserver.MockWebServer;
 
@@ -31,7 +35,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.core.IsNot.not;
 
 @RunWith(AndroidJUnit4.class)
 public class AboutCanadaActivityTest {
@@ -55,38 +58,34 @@ public class AboutCanadaActivityTest {
 
     @Test
     public void testApiSuccessAndVerifyTitle() {
-
         activityTestRule.launchActivity(new Intent());
-
-        Espresso.onView(withId(R.id.tvLoading)).check(matches(not(isDisplayed())));
-        Espresso.onView(withId(R.id.rvAboutCanadaList)).check(matches(isDisplayed()));
-        Espresso.onView(withId(R.id.toolbar)).check(matches(hasDescendant(withText("About Canada"))));
-
+        if (isConnected(aboutCanadaActivity.getApplicationContext())) {
+            Espresso.onView(withId(R.id.rvAboutCanadaList)).check(matches(isDisplayed()));
+            Espresso.onView(withId(R.id.toolbar)).check(matches(hasDescendant(withText("About Canada"))));
+        } else {
+            Espresso.onView(withId(R.id.toolbar)).check(matches(hasDescendant(withText("About Canada"))));
+        }
     }
 
     @Test
     public void swipeToRefreshTest() {
         onView(withId(R.id.swipeRefreshLayout))
-                .perform(withConstraints(swipeDown(), isDisplayingAtLeast(95)));
+            .perform(withConstraints(swipeDown(), isDisplayingAtLeast(95)));
     }
 
     @Test
     public void scrollToBottomRecyclerViewTest() {
-
         RecyclerView recyclerView = aboutCanadaActivity.findViewById(R.id.rvAboutCanadaList);
-
         if (getRowViewCount(recyclerView) > 0) {
             onView(withId(R.id.rvAboutCanadaList))
-                    .perform(RecyclerViewActions.scrollToPosition(Objects.requireNonNull(recyclerView.getAdapter()).getItemCount() - 1));
+                .perform(RecyclerViewActions.scrollToPosition(Objects.requireNonNull(recyclerView.getAdapter()).getItemCount() - 1));
         }
     }
 
     @After
     public void tearDown() throws Exception {
         aboutCanadaActivity = null;
-
         webServer.shutdown();
-
     }
 
     private int getRowViewCount(RecyclerView recyclerView) {
@@ -110,5 +109,30 @@ public class AboutCanadaActivityTest {
                 action.perform(uiController, view);
             }
         };
+    }
+
+    /**
+    * Method to check if internet connection is available or not
+    * */
+    private boolean isConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+
+    /**
+     * Method to finish activity
+     * */
+    public void finishActivity() {
+        // purposefully don't call super since we've already finished all the activities
+        // instead, null out the mActivity field in the parent class using reflection
+        try {
+            Field activityField = ActivityTestRule.class.getDeclaredField("mActivity");
+            activityField.setAccessible(true);
+            activityField.set(this, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
